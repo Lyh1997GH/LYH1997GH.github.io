@@ -57,10 +57,10 @@ kramdown:
 
 # Gitalk
 gitalk:
-  enable: true    #是否开启Gitalk评论
+  enable: true
   clientID: cc7fc9924a40dee1cbee
   clientSecret: 183d7208c905fca26d6ed3796229dc0d09be81ad
-  repo: LYH1997GH.github.io
+  repo: Lyh1997GH.LYH1997GH.github.io
   owner: Lyh1997GH
   admin: Lyh1997GH
   distractionFreeMode: true
@@ -72,8 +72,8 @@ gitalk:
 # Baidu Analytics
 
 # Google Analytics
-ga_track_id: 'UA-90855596-1'            # Format: UA-xxxxxx-xx
-ga_domain: xionghz.top               # 默认的是 auto, 这里我是自定义了的域名，你如果没有自己的域名，需要改成auto
+#ga_track_id: 'UA-90855596-1'            # Format: UA-xxxxxx-xx
+#ga_domain: xionghz.top               # 默认的是 auto, 这里我是自定义了的域名，你如果没有自己的域名，需要改成auto
 
 
 
