@@ -58,12 +58,12 @@ kramdown:
 # Gitalk
 gitalk:
   enable: true    #是否开启Gitalk评论
-  clientID: cc7fc9924a40dee1cbee                            #生成的clientID
-  clientSecret: 183d7208c905fca26d6ed3796229dc0d09be81ad    #生成的clientSecret
-  repo: LYH1997GH.github.io    #仓库名称
-  owner: Lyh1997GH     #github用户名
+  clientID: cc7fc9924a40dee1cbee
+  clientSecret: 183d7208c905fca26d6ed3796229dc0d09be81ad
+  repo: Lyh1997GH.LYH1997GH.github.io
+  owner: Lyh1997GH
   admin: Lyh1997GH
-  distractionFreeMode: true #是否启用类似FB的阴影遮罩
+  distractionFreeMode: true
 
 
 # 统计
