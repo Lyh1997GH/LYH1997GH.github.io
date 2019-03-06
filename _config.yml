@@ -63,7 +63,7 @@ gitalk:
   repo: Lyh1997GH.LYH1997GH.github.io
   owner: Lyh1997GH
   admin: Lyh1997GH
-  distractionFreeMode: false
+  distractionFreeMode: true
 
 
 # 统计
