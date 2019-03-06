@@ -20,7 +20,7 @@ sidebar-avatar: /img/avatar_m.jpg      # use absolute URL, seeing it's used in b
 RSS: false
 # weibo_username:     
 zhihu_username:     
-github_username:    lyh1997gh
+github_username:    Lyh1997GH
 facebook_username:  
 jianshu_username:   fea279f7363c
 #twitter_username:   
@@ -63,7 +63,7 @@ gitalk:
   repo: Lyh1997GH.LYH1997GH.github.io
   owner: Lyh1997GH
   admin: Lyh1997GH
-  distractionFreeMode: true
+  distractionFreeMode: false
 
 
 # 统计
