@@ -54,8 +54,16 @@ kramdown:
   input: GFM                            # use Github Flavored Markdown !important
 
 
-# Disqus settings（https://disqus.com/）
-disqus_username: xionghz
+# Gitalk
+gitalk:
+  enable: true    #是否开启Gitalk评论
+  clientID: cc7fc9924a40dee1cbee                            #生成的clientID
+  clientSecret: 183d7208c905fca26d6ed3796229dc0d09be81ad    #生成的clientSecret
+  repo: Lyh1997GH.LYH1997GH.github.io   #仓库名称
+  owner: Lyh1997GH    #github用户名
+  admin: Lyh1997GH
+  distractionFreeMode: true #是否启用类似FB的阴影遮罩
+
 
 
 
