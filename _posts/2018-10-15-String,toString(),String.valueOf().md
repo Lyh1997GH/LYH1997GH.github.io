@@ -22,7 +22,7 @@ public static void main(String[] args) {
 		System.out.println(str);
 }
 ```
-<font color="red">以上程序运行会抛出异常</font>：
+<font color="red">以上程序运行会抛出异常:</font>
 
 ```java
 Exception in thread "main" java.lang.ClassCastException: 
@@ -42,7 +42,7 @@ public static void main(String[] args) {
 		}
 		str = "default";
 		System.out.println(str);
-	}
+}
 
 ```
 
@@ -55,7 +55,7 @@ public static void main(String[] args) {
 	System.out.println(obj.toString());
 }
 ```
-<font color="red">以上程序运行会抛出异常</font>：
+<font color="red">以上程序运行会抛出异常:</font>
 
 ```java
 Exception in thread "main" java.lang.NullPointerException
