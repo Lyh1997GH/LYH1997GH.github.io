@@ -14,11 +14,11 @@ tags:
 
 #### 一、单个参数
 
-```sql
+```java
 public List<XXBean> select***(String id);  
 
 <select id="select***" resultType="XXBean">
-　　	select t.* from tableName t where t.id= #{value}  
+　　select t.* from tableName t where t.id= #{value}  
 </select>  
 ```
 ***
@@ -27,13 +27,11 @@ public List<XXBean> select***(String id);
  * select 后的字段列表要和bean中的属性名一致， 如果不一致的可以用 as 来补充。
 
 #### 二、多参数
-```sql
+```java
 public List<XXXBean> selectByParams(String xxId, String xxCode);  
 
 <select id="selectByParams" resultType="XXBean">
-
 　　select t.* from tableName where id = #{0} and name = #{1}  
-
 </select>  
 ```
 ***
@@ -41,7 +39,7 @@ public List<XXXBean> selectByParams(String xxId, String xxCode);
  * 多参数采用索引式方法，和数组有异曲同工之妙：#{index} 索引从0开始。
 
 #### 三、Map封装多参数
-```sql
+```java
 public List<XXXBean> select***(HashMap map);  
 
 <select id="select***" parameterType="java.util.HashMap" resultType="XXBean">
@@ -55,7 +53,7 @@ public List<XXXBean> select***(HashMap map);
  * hashmap 的 key 为 #{key}。
  
 #### 四、List封装foreach
-```sql
+```java
 public List<user> select***(List<user> list);  
 
 <select id="select***" resultType="top.xiong.user">
@@ -75,7 +73,7 @@ public List<user> select***(List<user> list);
  * `separator`:循环完一次参数后要打印的字符串。
 
 #### 五、多参数传递之注解方式   
-```
+```java
 public AddrInfo selectInfo(@Param("id")int corpId, @Param("user")int addrId);
  
 <select id="selectInfo" resultMap="top.xiong.user">
@@ -88,7 +86,7 @@ public AddrInfo selectInfo(@Param("id")int corpId, @Param("user")int addrId);
 #### 六、多种类型参数
 实际所需参数既要包含String类型，又要包含List类型时的处理方法。将参数放入Map，再取出Map中的List遍历。如下：
 
-```sql
+```java
 List<String> list = new ArrayList<String>();
 list.add("1");
 list.add("2");
@@ -100,7 +98,12 @@ map.put("siteTag", "0");//网址类型
 public List<SysWeb> getSysInfo(Map<String, Object> map) {
 　　return getSqlSession().selectList("sysweb.getSysInfo", map);
 }
- 
+
+```
+
+***
+
+```xml 
 <select id="getSysInfo" parameterType="java.util.Map" resultType="SysWeb">
 　　select t.sysSiteId, t.siteName, t1.mzNum as siteTagNum, t1.mzName as siteTag, t.url, t.iconPath
    from ***1 t left join ***2 t1 on t1.mzNum = t.siteTag and t1.mzType = 10
