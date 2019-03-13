@@ -60,7 +60,7 @@ public class Commodity {
 这个Field类的实例描述了属性的全部信息。包括：属性名称、属性类型、属性修饰符、属性注解 等等
 
 ## 2、如何获取Field类对象
-一共有4种方法,全部都在 Class 类中:<br>
+一共有4种方法,全部都在 Class 类中:
 
 * `getFields()`: 获取类中 public 类型的属性
 * `getField(String name)`： 获取类特定的方法，name 参数指定了属性的名称
