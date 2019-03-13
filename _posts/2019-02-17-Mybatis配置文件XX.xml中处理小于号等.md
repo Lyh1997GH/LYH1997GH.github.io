@@ -22,18 +22,17 @@ tags:
 #### 2.解决方法
 将`<`替换成对应的转义符:
 
-```
+```sql
 <!-- &lt; 小于号-->
 <select id="selectJcList" parameterType="hashmap">
     select num from zs_jc where stat= 'N' and num &lt; 50 and supno =#{suppnoss} and incode=#{incode}
 </select>
 
 ```
-***
 
 ## 3.符号对应表
 
-| <| <=|  >|>= | &| '|  "|
+| <| <=|  >|>= | &|'|  "|
 | --------| -----:| :----: | -----:| -----| -----:| :----: |
 | \&lt;| \&lt;=|\&gt;|  \&gt;=  | \&apos;| \&quot;|\&gt;|
 

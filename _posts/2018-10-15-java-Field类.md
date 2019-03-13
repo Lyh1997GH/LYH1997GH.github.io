@@ -1,78 +1,103 @@
 ---
 layout:     post
 title:      java-Field类
-subtitle:   java.lang.reflect.Field详解
+subtitle:   java.lang.reflect.Field详解反射
 date:       2018-10-15
 author:     Xionghz
 header-img: 
 catalog: true
 tags:
-    - java IOC
+    - java
 ---
 
 # java.lang.reflect.Field详解
 ## 1、Feild是什么
-_Field是一个类,位于java.lang.reflect包下。<br>
-在Java反射中 Field类描述的是 类的属性信息,通俗来讲 有一个类如下：_
+Field是一个类,位于`java.lang.reflect`包下。<br>
+在Java反射中 Field 类描述的是 类的属性信息,比如：
 
-```
-package com.testReflect;
-public class FieldDemo {
-    public int num1 = 1;
-    protected int num2 = 2;
-    int num3 = 3;
-    private int num4 = 4;
-    
-    public String s1 = "a";
-    protected String s2 = "b";
-    String s3 = "c";
-    private String s4 = "d";
+```java
+package top.xiong.snark.model;
+
+import java.lang.Override;
+import top.xiong.snark.annotation.Column;
+import top.xiong.snark.annotation.TbName;
+
+@TbName(name = "Commodity")
+public class Commodity {
+  @Column("id")
+  private Long id;
+
+  @Column("commodity_code")
+  private String commodity_code;
+
+  public Commodity() {
+  }
+
+  public Long getId() {
+    return this.id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public String getCommodity_code() {
+    return this.commodity_code;
+  }
+
+  public void setCommodity_code(String commodity_code) {
+    this.commodity_code = commodity_code;
+  }
+
+  @Override
+  public String toString() {
+    return "Commodity { " + "id =" + id +", commodity_code =" + commodity_code +" + '}';
+  }
 }
 
 ```
-_在Java反射中FieldDemo类中的属性: num1、num2、num3、num4 都是Field类的实例，这个Field类的实例描述了属性的全部信息。（包括：属性名称、属性类型、属性修饰符、属性注解 等等_
+
+这个Field类的实例描述了属性的全部信息。包括：属性名称、属性类型、属性修饰符、属性注解 等等
 
 ## 2、如何获取Field类对象
-_一共有4种方法,全部都在Class类中:<br>_
+一共有4种方法,全部都在 Class 类中:<br>
 
-* getFields(): 获取类中public类型的属性
-* getField(String name)： 获取类特定的方法，name参数指定了属性的名称
-* getDeclaredFields(): 获取类中所有的属性(public、protected、default、private),但不包	括继承的属性。
-* getDeclaredField(String name): 获取类特定的方法，name参数指定了属性的名称
+* `getFields()`: 获取类中 public 类型的属性
+* `getField(String name)`： 获取类特定的方法，name 参数指定了属性的名称
+* `getDeclaredFields()`: 获取类中所有的属性`public、protected、default、private`,但不包括继承的属性。此种方法最常用，比如代码生成器。
+* `getDeclaredField(String name)`: 获取类特定的方法，name 参数指定了属性的名称
 
 ## 3、Field类中常用的方法
 _对于类中的属性，我们常用的操作：<br>_
 
-```
-package com.testReflect;
+```java
+/**
+* 生成查询全表的 sql
+* @param obj 已经实例化的类
+* @return select all
+*/
+public String getSelectAllCore(Object obj) {
+    StringBuilder classField = new StringBuilder();
+    //获取此类所有的成员变量 public、protected、default、private
+    Field[] fields = obj.getClass().getDeclaredFields();
+    //遍历
+    for (Field field : fields) {
+        //设置 true ，否则会抛异常
+        field.setAccessible(true);
+        if (field.isAnnotationPresent(Column.class)) {
+            //获取成员变量的注解
+            Column column = field.getAnnotation(Column.class);
+            //当注解为空时获取当前成员变量的值 field.getName
+            String value = StringUtil.isEmpty(column.value()) ? field.getName() : column.value();
+            classField.append(value).append(",");
+        }
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
-
-public class FieldTest {
-    public static void main(String[] args) throws Exception {
-        //使用反射第一步:获取操作类FieldDemo所对应的Class对象
-        Class<?> cls = Class.forName("com.testReflect.FieldDemo");
-        //使用FieldDemo类的class对象生成 实例
-        Object obj = cls.newInstance();
-                
-        //通过Class类中getField(String name)：获取类特定的方法，name参数指定了属性的名称
-        Field field = cls.getField("num1");        
-
-        //拿到了Field类的实例后就可以调用其中的方法了
-        
-        //方法:getModifiers()  以整数形式返回由此 Field 对象表示的字段的 Java 语言修饰符
-        System.out.println("修饰符:  " +Modifier.toString(field.getModifiers()));
-
-        //方法:getType()  返回一个 Class 对象，它标识了此 Field 对象所表示字段的声明类型
-        System.out.println("类型:  "+field.getType());
-        
-        //方法:get(Object obj) 返回指定对象obj上此 Field 表示的字段的值
-        System.out.println("属性值:  "+field.get(obj));
-        
-        //方法: set(Object obj, Object value)  将指定对象变量上此 Field 对象表示的字段设置为指定的新值
-        field.set(obj, 55);
-        System.out.println("修改属性值后 --> get(Object obj):  "+field.get(obj));
     }
+    classField.deleteCharAt(classField.length()-1);
+    StringBuilder sb= new StringBuilder("select ");
+    sb.append(classField);
+    sb.append(" from " ).append(getTableName(obj));
+    return sb.toString();  
 }
+    
 ```

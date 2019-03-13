@@ -14,7 +14,7 @@ tags:
 
 <b>日志报错提示:</b>
 
-```
+```java
 Exception in thread "main" java.lang.ExceptionInInitializerError
  at top.xionghz.util.TestUtil.sds(TestUtil.java:24)
  at top.xionghz.util.TestUtil.main(TestUtil.java:17)
@@ -29,11 +29,11 @@ Caused by: java.lang.RuntimeException: loading file MybaitsConfig.xml failureorg
 
 <b>错误位置:</b><br/>
 
-```
+```xml
 <mappers>
     <mapper resource="StoW/ShopCaseMapper.xml"/>
     <package name="top.xionghz.mapper"/>
 </mappers>
 ```
 
-由于.xml映射文件的 namespace 的ID是唯一的，并且只能注册一次。上述<mappers>标签里加载两次Mapper。所以导致报错。
+由于 .xml 映射文件的 namespace 的ID是唯一的，并且只能注册一次。上述`<mappers>`标签里加载两次 Mapper。所以导致报错。
