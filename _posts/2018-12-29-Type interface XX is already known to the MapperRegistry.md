@@ -7,7 +7,7 @@ author:     Xionghz
 header-img: 
 catalog: true
 tags:
-    - java Mybatis
+    - Mybatis
 ---
 
 # Mybatis报错:Type interface XX is already known to the MapperRegistry
